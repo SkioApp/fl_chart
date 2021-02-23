@@ -1166,14 +1166,25 @@ class LineChartPainter extends AxisChartPainter<LineChartData>
         continue;
       }
 
-      final span = TextSpan(style: tooltipItem.textStyle, text: tooltipItem.text);
-      final tp = TextPainter(
-          text: span,
-          textAlign: TextAlign.center,
-          textDirection: TextDirection.ltr,
-          textScaleFactor: textScale);
-      tp.layout(maxWidth: tooltipData.maxContentWidth);
-      drawingTextPainters.add(tp);
+      if (tooltipItem.richText == null) {
+        final span = TextSpan(
+            style: tooltipItem.textStyle, text: tooltipItem.text);
+        final tp = TextPainter(
+            text: span,
+            textAlign: TextAlign.center,
+            textDirection: TextDirection.ltr,
+            textScaleFactor: textScale);
+        tp.layout(maxWidth: tooltipData.maxContentWidth);
+        drawingTextPainters.add(tp);
+      } else {
+        final tp = TextPainter(
+            text: tooltipItem.richText.text,
+            textAlign: TextAlign.center,
+            textDirection: TextDirection.ltr,
+            textScaleFactor: textScale);
+        tp.layout(maxWidth: tooltipData.maxContentWidth);
+        drawingTextPainters.add(tp);
+      }
     }
     if (drawingTextPainters.isEmpty) {
       return;
