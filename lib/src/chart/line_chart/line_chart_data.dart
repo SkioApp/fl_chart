@@ -1607,17 +1607,19 @@ class LineTooltipItem with EquatableMixin {
   /// Style of showing text.
   final TextStyle textStyle;
 
+  final RichText richText;
+
   /// Shows a [text] with [textStyle] as a row in the tooltip popup.
-  LineTooltipItem(this.text, this.textStyle);
+  LineTooltipItem(this.text, this.textStyle, {this.richText});
 
   /// Used for equality check, see [EquatableMixin].
   @override
   List<Object> get props => [
         text,
         textStyle,
+        richText
       ];
 }
-
 /// details of showing indicator when touch happened on [LineChart]
 /// [indicatorBelowLine] we draw a vertical line below of the touched spot
 /// [touchedSpotDotData] we draw a larger dot on the touched spot to bold it
